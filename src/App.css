@@ -1,3 +1,26 @@
 html, body, #root {
   height: 100%;
 }
+.de-header{
+  margin-bottom: 0 !important;
+}
+
+.de-poster-text{
+  position: absolute;
+  z-index: 10;
+}
+
+.de-poster-heading{
+  margin-left: 5% !important;
+  margin-top: 7% !important;
+  line-height: 45px;
+  font-size: 45px;
+  color: #e2384d;
+}
+.de-poster-subheading{
+  margin-left: 5% !important;
+  line-height: 25px;
+  font-size: 25px;
+  color: #1f2554;
+  margin-top: calc(7% + 65px) !important;
+}

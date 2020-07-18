@@ -1,6 +1,5 @@
 import { Label, Dropdown, Menu, Icon, Image, Grid } from 'semantic-ui-react';
 import React from 'react';
-import BagIcon from '../../resources/icons/bag';
 
 export default class Header extends React.Component {
   state = { activeItem: 'Home' };
@@ -10,7 +9,7 @@ export default class Header extends React.Component {
     const { activeItem } = this.state;
 
     return (
-      <Menu size='large'>
+      <Menu size='large' className="de-header">
         <Menu.Item>
           <Label as='a' basic color='red' pointing='right'>
             Logo
