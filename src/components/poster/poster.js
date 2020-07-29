@@ -10,7 +10,7 @@ export default class Poster extends React.Component{
           Lorem Ipsum <br/>
         </div>
         <div className="de-poster-text de-poster-subheading">Neque porro quisquam est qui <br/>dolorem ipsum</div>
-        <Image src='resources/poster/model.png'/>
+        <img className="de-poster-image" style={{ background: '#e2dfdf' }} />
       </> 
     );
   }
