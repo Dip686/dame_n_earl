@@ -1,6 +1,15 @@
 html, body, #root {
   height: 100%;
 }
+.de-body{
+  padding-top: 5rem;
+}
+.de-shop {
+  padding-top: 2rem !important;
+  padding-bottom: 5rem !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
 .de-sticky-header-wrapper{
   background: white;
     width: 100%;
@@ -75,9 +84,26 @@ html, body, #root {
 .de-catergory-wrapper {
   width: 19%;
 }
+.de-btm-eye-catcher-wrapper{
+  padding: 2%;
+  padding-left: 7%;
+  padding-right: 7%;
+}
+.de-btm-eye-catcher-container{
+  display: flex;
+  justify-content: space-between;
+}
+.de-btm-eye-catcher {
+  width: 400px;
+  height: 120px;
+}
 .de-catergory-wrapper img {
   width: 100%;
   -moz-box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
   -webkit-box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+}
+
+.de-items {
+  width: 250px !important;
 }

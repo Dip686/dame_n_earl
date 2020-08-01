@@ -5,10 +5,12 @@ export default class BottomEyeCatcher extends React.Component{
 
   render(){
     return(
-      <div className="de-eye-catcher-container">
-        <Image className="de-eye-catcher" src='resources/bottom-eye-catcher/buy1get1.jpeg'/>
-        <Image className="de-eye-catcher" src='resources/bottom-eye-catcher/oxidisedearrings.jpeg'/>
-        <Image className="de-eye-catcher" src='resources/bottom-eye-catcher/off.jpeg'/>
+      <div className="de-btm-eye-catcher-wrapper">
+        <div className="de-btm-eye-catcher-container">
+          <Image className="de-btm-eye-catcher" src='resources/bottom-eye-catcher/catch1.png'/>
+          <Image className="de-btm-eye-catcher" src='resources/bottom-eye-catcher/catch2.png'/>
+          <Image className="de-btm-eye-catcher" src='resources/bottom-eye-catcher/catch3.png'/>
+        </div>  
       </div>
     );
   }

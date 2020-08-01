@@ -2,11 +2,8 @@ import { Label, Dropdown, Menu, Icon, Image, Grid } from 'semantic-ui-react';
 import React from 'react';
 
 export default class Header extends React.Component {
-  state = { activeItem: 'Home' };
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-
   render() {
-    const { activeItem } = this.state;
+    const activeItem = this.props.headerSelected;
 
     return (
       <div className="de-sticky-header-wrapper">
@@ -19,22 +16,22 @@ export default class Header extends React.Component {
           <Menu.Item
             name='Home'
             active={activeItem === 'Home'}
-            onClick={this.handleItemClick}
+            onClick={()=> {this.props.setHeaderSelected('Home')} }
           />
           <Menu.Item
             name='Shop'
             active={activeItem === 'Shop'}
-            onClick={this.handleItemClick}
+            onClick={()=> {this.props.setHeaderSelected('Shop')} }
           />
           <Menu.Item
             name='Gallery'
             active={activeItem === 'Gallery'}
-            onClick={this.handleItemClick}
+            onClick={()=> {this.props.setHeaderSelected('Gallery')} }
           />
           <Menu.Item
             name='Blog'
             active={activeItem === 'Blog'}
-            onClick={this.handleItemClick}
+            onClick={()=> {this.props.setHeaderSelected('Blog')} }
           />
           <Menu.Menu position='right'>
             <Menu.Item>
