@@ -13,10 +13,10 @@ export default class Item extends React.Component{
           <span className='date'>Joined in 2015</span>
         </Card.Meta> */}
         <Card.Description>
-          <span>{itemObj.currency}</span>
-          <span>{itemObj.currentPrice}</span>
-          <span>{itemObj.oldPrice}</span>
-          <span>Save {itemObj.discountAmount}({itemObj.percentageSavings})%</span>
+          <span className="de-item-currency">{itemObj.currency}</span>
+          <span className="de-item-current-price">{itemObj.currentPrice}</span>
+          <span className="de-item-old-price">{itemObj.currency}{itemObj.oldPrice}</span>
+      <span className="de-item-savings"> Save {itemObj.currency}{itemObj.discountAmount} ({itemObj.discountPercentage}%) </span>
         </Card.Description>
       </Card.Content>
       <Card.Content extra>

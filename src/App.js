@@ -6,7 +6,7 @@ import Body from './components/body/body';
 import Footer from './components/footer/footer';
 
 function App() {
-  const [headerSelected, setHeaderSelected] = useState('Home');
+  const [headerSelected, setHeaderSelected] = useState('Shop');
   return (
     <div className="App">
       <WebContainer>
