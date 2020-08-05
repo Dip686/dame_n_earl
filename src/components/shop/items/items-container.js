@@ -11,7 +11,7 @@ export default class ItemContainer extends React.Component{
     return (
       <Card.Group>
         {
-          items.map((itemObj)=> <Item itemObj={itemObj} />)
+          items.map((itemObj)=> <Item buyProduct={this.props.buyProduct} itemObj={itemObj} />)
         }
       </Card.Group>  
     );

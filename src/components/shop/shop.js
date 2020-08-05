@@ -6,7 +6,7 @@ import Product from './product';
 export default class Shop extends React.Component{
   state = { 
     activeProducts: '3',
-    shopView: 'product-details',
+    shopView: 'shop',
     products: {
       3: {
         count: 10,
@@ -136,7 +136,7 @@ export default class Shop extends React.Component{
     }
   }
   handleItemClick = (e, { name }) => this.setState({ activeProducts: name });
-
+  buyProduct = () => this.setState({shopView: 'product-details'});
   render(){
     const { activeProducts, shopView, products } = this.state;
     return(
@@ -164,7 +164,7 @@ export default class Shop extends React.Component{
                 </Menu>
               </Grid.Column>
               <Grid.Column width={13}>
-                <ItemContainer products={products} selectedProduct={activeProducts}/>
+                <ItemContainer buyProduct={this.buyProduct} products={products} selectedProduct={activeProducts}/>
               </Grid.Column>
             </Grid.Row>
           </Grid> : ''

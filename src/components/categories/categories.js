@@ -10,19 +10,19 @@ export default class Categories extends React.Component{
         <Header as='h1'> Categories to Bag</Header>
         <div className="de-catergory-container">
         <div className="de-catergory-wrapper">
-          <img src="resources/categories/indian-wear.png" /> 
+          <img src="resources/categories/indian-wear.jpeg" /> 
         </div>
         <div className="de-catergory-wrapper">
-          <img src="resources/categories/western-wear.png" /> 
+          <img src="resources/categories/western-wear.jpeg" /> 
         </div>
         <div className="de-catergory-wrapper">
-          <img src="resources/categories/earings.png" /> 
+          <img src="resources/categories/earings.jpeg" /> 
         </div>
         <div className="de-catergory-wrapper">
-          <img src="resources/categories/hair-accessories.png" /> 
+          <img src="resources/categories/hair-accessories.jpeg" /> 
         </div>
         <div className="de-catergory-wrapper">
-          <img src="resources/categories/nose-pins.png" /> 
+          <img src="resources/categories/nose-pins.jpeg" /> 
         </div>
         </div>
       </div>

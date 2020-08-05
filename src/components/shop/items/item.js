@@ -5,7 +5,7 @@ export default class Item extends React.Component{
   render(){
     const itemObj = this.props.itemObj;
     return (
-      <Card className="de-items">
+      <Card className="de-items" onClick={this.props.buyProduct}>
       <Image src={itemObj.url} wrapped ui={false} />
       <Card.Content>
         <Card.Header>{itemObj.header}</Card.Header>

@@ -8,10 +8,8 @@ export default class Header extends React.Component {
     return (
       <div className="de-sticky-header-wrapper">
         <Menu size='large' className="de-header" secondary pointing>
-          <Menu.Item>
-            <Label as='a' basic color='red' pointing='right'>
-              Logo
-            </Label>
+          <Menu.Item style={{padding: '0', paddingBottom: '4px', paddingTop: '8px'}}>
+            <Image height="32" width="200" src="resources/logo/logo.jpeg" />
           </Menu.Item>
           <Menu.Item
             name='Home'
