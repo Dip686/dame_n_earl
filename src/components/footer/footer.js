@@ -41,7 +41,7 @@ export default class Footer extends React.Component {
               </Grid.Column>
               <Grid.Column width={4}>
                 <List inverted link>
-                  <List.Item>
+                  <List.Item as="a">
                     <Image height="32" width="32" src="resources/footer-image/sewing-machine.svg"/>
                     <p style={{ paddingTop: '4px', display: 'inline-block', paddingLeft: '8px' }} as="h4" inverted>Made in India</p>
                   </List.Item>

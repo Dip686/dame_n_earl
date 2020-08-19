@@ -1,10 +1,19 @@
-import { Label, Dropdown, Menu, Icon, Image, Grid } from 'semantic-ui-react';
+import { Label, Dropdown, Menu, Icon, Image, Grid, Popup, Header as Heading, Button, Modal, Input } from 'semantic-ui-react';
 import React from 'react';
 
 export default class Header extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      modalState:{
+        isOpen: true,
+        isLogin: false
+      }
+    }
+  }
   render() {
     const activeItem = this.props.headerSelected;
-
+    const modalState = this.state.modalState;
     return (
       <div className="de-sticky-header-wrapper">
         <Menu size='large' className="de-header" secondary pointing>
@@ -38,8 +47,15 @@ export default class Header extends React.Component {
             <Menu.Item>
             <Image src='/resources/wishlist.svg'/>
             </Menu.Item>
-            <Menu.Item>
-              <Icon name="user outline"/>
+            <Menu.Item as="a">
+              <Popup hoverable on='hover' trigger={<Icon name="user outline"/>} position='bottom right'>
+                <Heading as="h6">Welcome</Heading>
+                <span>To access account and manage orders</span>
+                <div>
+                  <Button icon='sign-in' color='teal' content='Sign in' onClick={() => this.setState({modalState: {isOpen: true}})}/>
+                  <Button icon='signup' color='blue' content='Sign up'  onClick={() => this.setState({modalState: {isOpen: true, isLogin: false}})}/>
+                </div>  
+              </Popup>
             </Menu.Item>
             <Dropdown item text='English'>
               <Dropdown.Menu>
@@ -72,6 +88,63 @@ export default class Header extends React.Component {
             </Dropdown>
           </Menu.Menu>
         </Menu>
+        <Modal
+        centered={false}
+        size='mini'
+        open={modalState.isOpen}
+        onClose={() => this.setState({modalState: {isOpen: false}})}
+        >
+          <Modal.Header>Login</Modal.Header>
+          <Modal.Content>
+            <p>Please enter your details:</p>
+            {modalState.isLogin ?
+              <Grid columns={1}>
+                <Grid.Row>
+                  <Grid.Column>
+                    <Input fluid icon='user' iconPosition='left' placeholder='Please enter your user name' />
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row> 
+                  <Grid.Column>
+                    <Input type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
+                  </Grid.Column>  
+                </Grid.Row> 
+              </Grid>  
+              :
+              <Grid columns={1}>
+                <Grid.Row>
+                  <Grid.Column>
+                    <Input fluid icon='mail' iconPosition='left' placeholder='Please enter your email id' />
+                  </Grid.Column>  
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column>
+                    <Input type="number" fluid icon='mobile' iconPosition='left' placeholder='Please enter your mobile number' />
+                  </Grid.Column>  
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column>
+                    <Input type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
+                  </Grid.Column>  
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column>
+                    <Input type="password" fluid icon='user secret' iconPosition='left' placeholder='Please confirm your password' />
+                  </Grid.Column>  
+                </Grid.Row> 
+              </Grid>
+
+            }
+          </Modal.Content>
+          <Modal.Actions>
+            <Button secondary onClick={() => this.setState({modalState: {isOpen: false}})}>
+              cancel
+            </Button>
+            <Button primary onClick={() => this.setState({modalState: {isOpen: false}})}>
+              Sign in
+            </Button>
+          </Modal.Actions>
+        </Modal>
       </div>
     )
   }
