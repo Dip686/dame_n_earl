@@ -27,14 +27,14 @@ export default class ProductAction extends React.Component {
               Add to your cart
             </Label>
           </Button>
-          <Button className="de-product-action-button" fluid as='div' labelPosition='right'>
+          {/* <Button className="de-product-action-button" fluid as='div' labelPosition='right'>
             <Button color='yellow'>
               <Icon name='list' />
             </Button>
             <Label className="de-product-action-label" as='div' basic color='yellow' pointing='left'>
               Add to your wishList
             </Label>
-          </Button>
+          </Button> */}
         </Grid.Row>
       </Grid>
     );

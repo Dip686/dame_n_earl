@@ -1,6 +1,11 @@
 import React from 'react';
 import Home from '../home/home';
 import Shop from '../shop/shop';
+import Product from  '../shop/product';
+import {
+  Switch,
+  Route
+} from "react-router-dom";
 
 function getViz(headerSelected) {
   switch(headerSelected) {
@@ -16,7 +21,20 @@ export default class Body extends React.Component{
     return(
       <div>
         <div className="de-body">
-          {getViz(headerSelected)}
+          <Switch>
+            <Route exact path="/home">
+              <Home />
+            </Route>
+            <Route exact path="/shop">
+              <Shop />
+            </Route>
+            <Route exact path="/shop/product">
+              <Product />
+            </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
+          </Switch>
         </div>
       </div>
     );

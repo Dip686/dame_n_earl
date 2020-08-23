@@ -1,178 +1,69 @@
 import React from 'react';
 import { Menu, Grid } from 'semantic-ui-react';
 import ItemContainer from './items/items-container';
-import Product from './product';
+import { connect } from 'react-redux';
 
-export default class Shop extends React.Component{
-  state = { 
-    activeProducts: '3',
-    shopView: 'shop',
-    products: {
-      3: {
-        count: 10,
-        items: [
-          {
-            url: 'resources/products/earrings/1.jpeg',
-            header: 'Earring',
-            currency: '₹',
-            oldPrice: '1000',
-            currentPrice: '900',
-            discountAmount: '100',
-            discountPercentage: '10',
-            rating: '4.5',
-            maxRating: '5'
-          },
-          {
-            url: 'resources/products/earrings/1.jpeg',
-            header: 'Earring',
-            currency: '₹',
-            oldPrice: '1000',
-            currentPrice: '900',
-            discountAmount: '100',
-            discountPercentage: '10',
-            rating: '4.5',
-            maxRating: '5'
-          },
-          {
-            url: 'resources/products/earrings/1.jpeg',
-            header: 'Earring',
-            currency: '₹',
-            oldPrice: '1000',
-            currentPrice: '900',
-            discountAmount: '100',
-            discountPercentage: '10',
-            rating: '4.5',
-            maxRating: '5'
-          },
-          {
-            url: 'resources/products/earrings/1.jpeg',
-            header: 'Earring',
-            currency: '₹',
-            oldPrice: '1000',
-            currentPrice: '900',
-            discountAmount: '100',
-            discountPercentage: '10',
-            rating: '4.5',
-            maxRating: '5'
-          },
-          {
-            url: 'resources/products/earrings/1.jpeg',
-            header: 'Earring',
-            currency: '₹',
-            oldPrice: '1000',
-            currentPrice: '900',
-            discountAmount: '100',
-            discountPercentage: '10',
-            rating: '4.5',
-            maxRating: '5'
-          },
-          {
-            url: 'resources/products/earrings/1.jpeg',
-            header: 'Earring',
-            currency: '₹',
-            oldPrice: '1000',
-            currentPrice: '900',
-            discountAmount: '100',
-            discountPercentage: '10',
-            rating: '4.5',
-            maxRating: '5'
-          },
-          {
-            url: 'resources/products/earrings/1.jpeg',
-            header: 'Earring',
-            currency: '₹',
-            oldPrice: '1000',
-            currentPrice: '900',
-            discountAmount: '100',
-            discountPercentage: '10',
-            rating: '4.5',
-            maxRating: '5'
-          },
-          {
-            url: 'resources/products/earrings/1.jpeg',
-            header: 'Earring',
-            currency: '₹',
-            oldPrice: '1000',
-            currentPrice: '900',
-            discountAmount: '100',
-            discountPercentage: '10',
-            rating: '4.5',
-            maxRating: '5'
-          },
-          {
-            url: 'resources/products/earrings/1.jpeg',
-            header: 'Earring',
-            currency: '₹',
-            oldPrice: '1000',
-            currentPrice: '900',
-            discountAmount: '100',
-            discountPercentage: '10',
-            rating: '4.5',
-            maxRating: '5'
-          },
-          {
-            url: 'resources/products/earrings/1.jpeg',
-            header: 'Earring',
-            currency: '₹',
-            oldPrice: '1000',
-            currentPrice: '900',
-            discountAmount: '100',
-            discountPercentage: '10',
-            rating: '4.5',
-            maxRating: '5'
-          },            {
-            url: 'resources/products/earrings/1.jpeg',
-            header: 'Earring',
-            currency: '₹',
-            oldPrice: '1000',
-            currentPrice: '900',
-            discountAmount: '100',
-            discountPercentage: '10',
-            rating: '4.5',
-            maxRating: '5'
-          }
-        ]
-      }
+const mapStateToProps = (state, ownProps) => {
+  return {
+    products: state.products
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onActiveItemAdd: productDetail => {
+      dispatch({
+        type: 'ADD_ACTIVE_ITEM',
+        payload: productDetail
+      });
     }
   }
-  handleItemClick = (e, { name }) => this.setState({ activeProducts: name });
-  buyProduct = () => this.setState({shopView: 'product-details'});
+}
+
+class Shop extends React.Component{
+  state = { 
+    activeCategory: this.props.products.activeCategory,
+    products: this.props.products.products
+  }
+  handleItemClick = (e, { name }) => this.setState({ activeCategory: name });
+  
   render(){
-    const { activeProducts, shopView, products } = this.state;
+    console.log(this.props, this.state);
+    const { activeCategory, products } = this.state;
     return(
       <Grid className="de-shop">
-        { shopView === 'shop' ?
-          <Grid columns={2}>
-            <Grid.Row>
-              <Grid.Column width={3}>
-                  <Menu pointing vertical>
-                  <Menu.Item
-                    name='1'
-                    active={activeProducts === '1'}
-                    onClick={this.handleItemClick}
-                  > Indian Wear</Menu.Item>
-                  <Menu.Item
-                    name='2'
-                    active={activeProducts === '2'}
-                    onClick={this.handleItemClick}
-                  >Western Wear</Menu.Item>
-                  <Menu.Item
-                    name='3'
-                    active={activeProducts === '3'}
-                    onClick={this.handleItemClick}
-                  >Earrings</Menu.Item>
-                </Menu>
-              </Grid.Column>
-              <Grid.Column width={13}>
-                <ItemContainer buyProduct={this.buyProduct} products={products} selectedProduct={activeProducts}/>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid> : ''
-        }
-        {
-          shopView === 'product-details' ? <Product productDetails={products[activeProducts].items[0]} /> : ''
-        }
-      </Grid>  
+        <Grid columns={2}>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <Menu pointing vertical>
+                <Menu.Item
+                  name='indian_wear'
+                  active={activeCategory === 'indian_wear'}
+                  onClick={this.handleItemClick}
+                > Indian Wear
+                </Menu.Item>
+                <Menu.Item
+                  name='western_wear'
+                  active={activeCategory === 'western_wear'}
+                  onClick={this.handleItemClick}
+                >Western Wear
+                </Menu.Item>
+                <Menu.Item
+                  name='earrings'
+                  active={activeCategory === 'earrings'}
+                  onClick={this.handleItemClick}
+                >Earrings
+                </Menu.Item>
+              </Menu>
+            </Grid.Column>
+            <Grid.Column width={13}>
+              <ItemContainer addActiveItem={this.props.onActiveItemAdd} products={products} selectedProduct={activeCategory}/>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid> : ''
+      </Grid>
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Shop)
