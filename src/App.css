@@ -10,6 +10,26 @@ html, body, #root {
   padding-left: 2rem !important;
   padding-right: 2rem !important;
 }
+.de-userprofile {
+  padding-top: 2rem !important;
+  padding-bottom: 5rem !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+.de-custom-card {
+  background: #fff;
+  border-radius: .28571429rem;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  transition: box-shadow .1s ease,transform .1s ease;
+  padding: .875em .5em !important;
+}
+.de-custom-address {
+  background: #fff;
+  border-radius: .28571429rem;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  padding: .875em .5em !important;
+  margin: 1rem;
+}
 .de-sticky-header-wrapper{
   background: white;
     width: 100%;

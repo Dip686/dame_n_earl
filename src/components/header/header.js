@@ -2,16 +2,39 @@ import { Dropdown, Menu, Icon, Image, Grid, Popup, Header as Heading, Button, Mo
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-export default class Header extends React.Component {
+const mapStateToProps = (state, ownProps) => {
+  return {
+    activeUser: state.activeUser
+  }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    signInActiveUser: userDetail => {
+      dispatch({
+        type: 'ADD_ACTIVE_USER',
+        payload: userDetail
+      });
+    },
+    signOutActiveUser: userDetail => {
+      dispatch({
+        type: 'ADD_ACTIVE_USER',
+        payload: userDetail
+      });
+    }
+  }
+}
+
+class Header extends React.Component {
   constructor(){
     super();
     this.state = {
       userName: '',
       password: '',
       isLoginModal: true,
-      successFulEntry: false,
-      isLoginPopUpOpen: false,
+      successFulEntry: 'in progress',
       modalState: {
         isOpen: false,
         isLogin: true
@@ -23,23 +46,53 @@ export default class Header extends React.Component {
       that = this;
     if (state.userName){
       if (state.password) {
-        this.setState({successFulEntry: true});
+        this.setState({successFulEntry: 'sending'});
         axios.post('http://localhost:5000/api/v1/auth/login', {
-          params: {
-            "email": state.userName,
-            "password": state.password
-          }
+          "email": state.userName,
+          "password": state.password
         })
         .then(function (response){
-          console.log(response);
-          if (response.isValidUser) {
-            that.setState({modalState: {...state.modalState, isOpen: false}})
+          if (response.data.success) {
+            that.props.signInActiveUser({
+              "name": "Sourav Debnath",
+              "avatar": "//www.gravatar.com/avatar/9d9d58a0780d938cba1da99ddd7353a3?s=200&r=pg&d=mm",
+              c_fname: "Sourav Debnath",
+              c_email: "sourav2012d@gmal.com",
+              c_contactno: "8981692691",
+              c_addresses: [{
+                c_recieverName: 'Debu1',
+                c_recieverContact: '9900990099',
+                c_city: "Chnandernagore",
+                c_pin: "712137",
+                c_state: "West bengal",
+                c_address: "dinemar danga, cgr"
+              },
+              {
+                c_recieverName: 'Debu2',
+                c_recieverContact: '9900990099',
+                c_city: "Chnandernagore",
+                c_pin: "712137",
+                c_state: "West bengal",
+                c_address: "dinemar danga, cgr"
+              },
+              {
+                c_recieverName: 'Debu3',
+                c_recieverContact: '9900990099',
+                c_city: "Chnandernagore",
+                c_pin: "712137",
+                c_state: "West bengal",
+                c_address: "dinemar danga, cgr"
+              }],
+              c_gender: "male",
+              c_usertype: "u3"
+            });
+            that.setState({modalState: {...state.modalState, isOpen: false, successFulEntry: 'in progress'}});
           } else {
-
+            that.setState({modalState: {...state.modalState, isOpen: false, successFulEntry: 'in progress'}});
           }
         })
         .catch(function (error) {
-          console.log(error);
+          that.setState({successFulEntry: 'failed'});
         });
       } else {
 
@@ -51,6 +104,8 @@ export default class Header extends React.Component {
   render() {
     const activeItem = this.props.headerSelected;
     const modalState = this.state.modalState;
+    const activeUser = this.props.activeUser.activeUser;
+
     return (
       <div className="de-sticky-header-wrapper">
         <Menu size='large' className="de-header" secondary pointing>
@@ -95,30 +150,43 @@ export default class Header extends React.Component {
             <Menu.Item as="a">
               <Popup 
                 hoverable 
-                onOpen={()=>{this.setState({isLoginPopUpOpen: true});}}
-                open={this.state.isLoginPopUpOpen}
+                closeOnPortalMouseLeave
+                closeOnDocumentClick
+                closeOnEscape
                 trigger={<Icon name="user outline"/>} 
                 position='bottom right'
               >
-                <Heading as="h6">Welcome</Heading>
-                <span>To access account and manage orders</span>
-                <div>
-                  <Button
-                    icon='sign-in'
-                    color='teal'
-                    content='Sign in'
-                    onClick={() => this.setState({ isLoginModal: true, isLoginPopUpOpen: false, modalState: {...modalState, isOpen: true,isLogin: true }})}
-                  />
-                  <Button
-                    icon='signup'
-                    color='blue'
-                    content='Sign up'
-                    onClick={() => this.setState({ isLoginModal: false, isLoginPopUpOpen: false, modalState: {...modalState, isOpen: true, isLogin: false}})}
-                  />
-                </div>  
+                <Heading as="h6">Welcome {activeUser && activeUser.name}</Heading>
+                {
+                  activeUser ?
+                  <>
+                  <Button onClick={()=>{this.props.signOutActiveUser(null)}}>Logout</Button>
+                  <Link to="/user/profile">
+                    <a>Visit your Profile</a>
+                  </Link>
+                  </>
+                  :
+                  <>
+                    <span>To access account and manage orders</span>
+                    <div>
+                      <Button
+                        icon='sign-in'
+                        color='teal'
+                        content='Sign in'
+                        onClick={() => this.setState({ isLoginModal: true, modalState: {...modalState, isOpen: true,isLogin: true }})}
+                      />
+                      <Button
+                        icon='signup'
+                        color='blue'
+                        content='Sign up'
+                        onClick={() => this.setState({ isLoginModal: false, modalState: {...modalState, isOpen: true, isLogin: false}})}
+                      />
+                    </div>  
+                  </>
+                }  
               </Popup>
             </Menu.Item>
-            <Dropdown item text='English'>
+            {/* <Dropdown item text='English'>
               <Dropdown.Menu>
                 <Dropdown.Item>English</Dropdown.Item>
                 <Dropdown.Item disabled>
@@ -146,10 +214,9 @@ export default class Header extends React.Component {
                   </Grid>
                 </Dropdown.Item>
               </Dropdown.Menu>
-            </Dropdown>
+            </Dropdown> */}
           </Menu.Menu>
         </Menu>
-        <form>
           <Modal
           centered={false}
           size='mini'
@@ -158,57 +225,64 @@ export default class Header extends React.Component {
           >
             <Modal.Header> {this.state.isLoginModal ? 'Login' : 'SignUp' }</Modal.Header>
             <Modal.Content>
-              <p>Please enter your details:</p>
-              {modalState.isLogin ?
-                <Grid columns={1}>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Input onChange={(e, data)=> { this.setState({userName: data.value});}} fluid icon='user' iconPosition='left' placeholder='Please enter your user name' />
-                    </Grid.Column>
-                  </Grid.Row>
-                  <Grid.Row> 
-                    <Grid.Column>
-                      <Input onChange={(e, data)=> { this.setState({password: data.value});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
-                    </Grid.Column>  
-                  </Grid.Row> 
-                </Grid>  
-                :
-                <Grid columns={1}>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Input fluid icon='mail' iconPosition='left' placeholder='Please enter your email id' />
-                    </Grid.Column>  
-                  </Grid.Row>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Input type="number" fluid icon='mobile' iconPosition='left' placeholder='Please enter your mobile number' />
-                    </Grid.Column>  
-                  </Grid.Row>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Input type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
-                    </Grid.Column>  
-                  </Grid.Row>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Input type="password" fluid icon='user secret' iconPosition='left' placeholder='Please confirm your password' />
-                    </Grid.Column>  
-                  </Grid.Row> 
-                </Grid>
+              <form onSubmit={(e)=>{ this.VerifysignIn(); e.preventDefault();}}>
+                <span>Please enter your details: </span>
+                {this.state.successFulEntry ==='failed'
+                  ?
+                  <span style={{color: 'red'}}> Login Failed</span>
+                  : ''
+                }
+                {modalState.isLogin ?
+                  <Grid columns={1}>
+                    <Grid.Row>
+                      <Grid.Column>
+                        <Input required onChange={(e, data)=> { this.setState({userName: data.value});}} fluid icon='user' iconPosition='left' placeholder='Please enter your user name' />
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row> 
+                      <Grid.Column>
+                        <Input required onChange={(e, data)=> { this.setState({password: data.value});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
+                      </Grid.Column>  
+                    </Grid.Row> 
+                  </Grid>  
+                  :
+                  <Grid columns={1}>
+                    <Grid.Row>
+                      <Grid.Column>
+                        <Input required fluid icon='mail' iconPosition='left' placeholder='Please enter your email id' />
+                      </Grid.Column>  
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column>
+                        <Input required type="number" fluid icon='mobile' iconPosition='left' placeholder='Please enter your mobile number' />
+                      </Grid.Column>  
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column>
+                        <Input required type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
+                      </Grid.Column>  
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column>
+                        <Input required type="password" fluid icon='user secret' iconPosition='left' placeholder='Please confirm your password' />
+                      </Grid.Column>  
+                    </Grid.Row> 
+                  </Grid>
 
-              }
+                }
+                <div style={{marginTop: '16px'}}>
+                  <Button secondary onClick={() => this.setState({modalState: {...modalState, isOpen: false}})}>
+                    cancel
+                  </Button>
+                  <Button loading={this.state.successFulEntry === 'loading'} primary onClick={() => {this.VerifysignIn();}}>
+                    Sign in
+                  </Button>
+                </div>  
+              </form>
             </Modal.Content>
-            <Modal.Actions>
-              <Button secondary onClick={() => this.setState({modalState: {...modalState, isOpen: false}})}>
-                cancel
-              </Button>
-              <Button loading={this.state.successFulEntry} primary onClick={() => {this.VerifysignIn();}}>
-                Sign in
-              </Button>
-            </Modal.Actions>
           </Modal>
-        </form>  
       </div>
     )
   }
 }
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

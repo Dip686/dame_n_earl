@@ -7,26 +7,30 @@
 //     activeProduct: productReducer
 //   }
 // });
-import { createStore, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import storage from 'redux-persist/lib/storage/';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 import productsReducer from './productsReducer';
-import productReducer from './activeProductReducer';
+import activeProductReducer from './activeProductReducer';
+import activeUserReducer from './activeUserReducer';
 
 const rootReducer = combineReducers({
     products: productsReducer,
-    activeProduct: productReducer
+    activeProduct: activeProductReducer,
+    activeUser: activeUserReducer
 });
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default () => {
-  let store = createStore(persistedReducer)
-  let persistor = persistStore(store)
+  const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
+  const persistor = persistStore(store);
   return { store, persistor }
 };

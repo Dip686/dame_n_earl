@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Grid } from 'semantic-ui-react';
+import { Menu, Grid , Pagination } from 'semantic-ui-react';
 import ItemContainer from './items/items-container';
 import { connect } from 'react-redux';
 
@@ -11,25 +11,34 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onActiveItemAdd: productDetail => {
+    updateActiveCategory: activeCategory => {
       dispatch({
-        type: 'ADD_ACTIVE_ITEM',
-        payload: productDetail
+        type: 'UPDATE_ACTIVE_CATEGORY',
+        payload: activeCategory
+      });
+    },
+    updateActivePage: activePage => {
+      dispatch({
+        type: 'UPDATE_ACTIVE_PAGE',
+        payload: activePage
       });
     }
   }
 }
 
 class Shop extends React.Component{
-  state = { 
-    activeCategory: this.props.products.activeCategory,
-    products: this.props.products.products
-  }
-  handleItemClick = (e, { name }) => this.setState({ activeCategory: name });
-  
+
+  handleItemClick = (e, { name }) => {this.props.updateActiveCategory(name)};
+  handlePageChange = (e, data) => {this.props.updateActivePage(data.activePage);};
+
   render(){
-    console.log(this.props, this.state);
-    const { activeCategory, products } = this.state;
+    let { activeCategory, products, activePage } = this.props.products;
+    let tmpActivePage = activePage - 1;
+    let totalItems = products[activeCategory].items.length;
+    let totalPages = Math.ceil(totalItems / 10);
+    let startItemIndex = tmpActivePage * 10;
+    let endItemIndex = Math.min(startItemIndex + 9, totalItems - 1);
+ 
     return(
       <Grid className="de-shop">
         <Grid columns={2}>
@@ -57,7 +66,16 @@ class Shop extends React.Component{
               </Menu>
             </Grid.Column>
             <Grid.Column width={13}>
-              <ItemContainer addActiveItem={this.props.onActiveItemAdd} products={products} selectedProduct={activeCategory}/>
+              <ItemContainer
+                startIndex={startItemIndex}
+                endItemIndex = {endItemIndex}
+                products={products}
+                activeCategory={activeCategory}
+              />
+              <br />
+              <br />
+              <br />
+              <Pagination onPageChange={this.handlePageChange} activePage={activePage} defaultActivePage={1} totalPages={totalPages} />
             </Grid.Column>
           </Grid.Row>
         </Grid> : ''

@@ -2,6 +2,7 @@ import React from 'react';
 import Home from '../home/home';
 import Shop from '../shop/shop';
 import Product from  '../shop/product';
+import UserProfile from  '../userProfile/userProfile';
 import {
   Switch,
   Route
@@ -30,6 +31,9 @@ export default class Body extends React.Component{
             </Route>
             <Route exact path="/shop/product">
               <Product />
+            </Route>
+            <Route exact path="/user/profile">
+              <UserProfile />
             </Route>
             <Route exact path="/">
               <Home />

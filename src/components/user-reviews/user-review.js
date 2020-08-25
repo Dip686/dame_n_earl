@@ -4,7 +4,6 @@ import { Grid, Header, Comment } from 'semantic-ui-react';
 export default class UserReview extends React.Component {
   render(){
     const productDetails = this.props.productDetails;
-    console.log(productDetails);
     return(
       <Grid>
         <Grid.Row>

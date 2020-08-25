@@ -2,16 +2,16 @@ import React from 'react';
 import Item from './item';
 import { Card } from 'semantic-ui-react';
 
-export default function ItemContainer(props) {
-  const selectedProduct = props.selectedProduct,
-    items = props.products[selectedProduct].items;
+function generateCards (start, end, items) {
+  const itemCards = [];
+  for (let index = start; index <= end; index++) {
+    itemCards.push(<Item itemObj={items[index]} />);
+  }
+  return itemCards;
+}
 
-  return (
-    <Card.Group>
-      {
-        items.map((itemObj)=> <Item addActiveItem={props.addActiveItem} itemObj={itemObj} />)
-      }
-    
-    </Card.Group>
-  );
+export default function ItemContainer(props) {
+  const activeCategory = props.activeCategory,
+    items = props.products[activeCategory].items;
+  return <Card.Group>{generateCards(props.startIndex, props.endItemIndex, items)}</Card.Group>;
 }

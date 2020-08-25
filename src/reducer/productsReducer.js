@@ -1,5 +1,6 @@
 const defaultState = {
   activeCategory: 'indian_wear',
+  activePage: 1,
   products: {
     'indian_wear': {
       count: 2,
@@ -196,6 +197,8 @@ const defaultState = {
 
 export default function getProducts(state = defaultState, action) {
   switch (action.type) {
-    default:   return { ...state};
+    case 'UPDATE_ACTIVE_CATEGORY': return {...state, activeCategory: action.payload, activePage: 1};
+    case 'UPDATE_ACTIVE_PAGE': return {...state, activePage: action.payload};
+    default:   return state;
   }
 }

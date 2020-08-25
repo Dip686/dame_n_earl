@@ -1,12 +1,14 @@
 import React from 'react';
 import { Card, Image, Rating } from 'semantic-ui-react';
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 
 export default function Item(props) {
   const itemObj = props.itemObj;
   const history = useHistory();
+  const dispatch = useDispatch();
   return (
-    <Card className="de-items" onClick={()=> {props.addActiveItem(itemObj); history.push('/shop/product');}}>
+    <Card className="de-items" onClick={()=> {history.push('/shop/product'); dispatch({ type: 'ADD_ACTIVE_ITEM', payload: itemObj})}}>
     <Image src={itemObj.url} wrapped ui={false} />
     <Card.Content>
       <Card.Header>{itemObj.header}</Card.Header>

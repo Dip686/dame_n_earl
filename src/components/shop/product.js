@@ -4,22 +4,10 @@ import UserReview from '../user-reviews/user-review';
 import ProductAction from '../product-action/product-action';
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state, ownProps) => {
-  console.log('-----dsdsds');
-  return {
-    activeProduct: state.activeProduct
-  }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-  }
-}
 
 class Product extends React.Component {
   render(){
-    const productDetails = this.props.activeProduct.activeProduct;
-    console.log(productDetails);
+    const productDetails = this.props.pId.activeProduct;
     return(
       <Grid columns={2}>
         <Grid.Row>
@@ -70,4 +58,11 @@ class Product extends React.Component {
     );
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    pId: state.activeProduct
+  }
+}
+
+export default connect(mapStateToProps, null)(Product);
