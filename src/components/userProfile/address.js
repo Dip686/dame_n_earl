@@ -1,10 +1,8 @@
 import React from 'react';
 import { Grid, Icon } from 'semantic-ui-react';
-import { useDispatch } from 'react-redux';
 
 export default function Address(props) {
   const address = props.address;
-  console.log(address);
   return (
     <Grid columns={2}>
       <Grid.Row>

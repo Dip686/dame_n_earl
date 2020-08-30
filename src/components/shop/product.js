@@ -44,16 +44,16 @@ class Product extends React.Component {
 
             </div> */}
           </Grid.Column>
-          <Grid.Column width={3}>
+          <Grid.Column width={2}>
             <ProductAction />
           </Grid.Column>
         </Grid.Row>
         <Divider/>
-        <Grid.Row className="de-product-comments">
+        {/* <Grid.Row className="de-product-comments">
           <Grid.Column>
             <UserReview productDetails={productDetails} />
           </Grid.Column>
-        </Grid.Row>
+        </Grid.Row> */}
       </Grid>
     );
   }

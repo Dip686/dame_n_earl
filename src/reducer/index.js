@@ -15,11 +15,13 @@ import thunk from 'redux-thunk';
 import productsReducer from './productsReducer';
 import activeProductReducer from './activeProductReducer';
 import activeUserReducer from './activeUserReducer';
+import cartReducer from './cartReducer';
 
 const rootReducer = combineReducers({
     products: productsReducer,
     activeProduct: activeProductReducer,
-    activeUser: activeUserReducer
+    activeUser: activeUserReducer,
+    cartDetails: cartReducer
 });
 
 const persistConfig = {

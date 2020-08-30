@@ -166,7 +166,7 @@ html, body, #root {
 }
 .de-product-price-details{
   color: #000077;
-  margin-top: 20px;
+  margin-top: 15px;
   font-size: 20px;
 }
 .de-product-price-details-old-price{
@@ -195,4 +195,9 @@ html, body, #root {
 }
 .de-product-action-button{
   margin-bottom: 8px !important;
+}
+.de-trash-icon {
+  color: red;
+  margin-top: 5px;
+  cursor: pointer;
 }

@@ -142,7 +142,9 @@ class Header extends React.Component {
           </Link>  
           <Menu.Menu position='right'>
             <Menu.Item>
-              <Image src='/resources/bag.svg'/>
+              <Link to="/shop/cart">
+                <Image src='/resources/bag.svg'/>
+              </Link>
             </Menu.Item>
             <Menu.Item>
             <Image src='/resources/wishlist.svg'/>
