@@ -1,8 +1,13 @@
 import React, {useState} from 'react';
 import { Grid, Input, Dropdown, Header, Button, Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Address from './address';
 import { useDispatch } from 'react-redux';
+import { UPDATE_USER_DETAILS_API } from '../../utils/constants';
+
 const genderOptions = [
+  { key: '', text: '___', value: '' },
   { key: 'female', text: 'female', value: 'female' },
   { key: 'male', text: 'male', value: 'male' },
   { key: 'other', text: 'other', value: 'other' },
@@ -49,37 +54,57 @@ const stateOptions = [
 ];
 
 export default function EditProfile(props){
-  const userDetail = props.userDetail;
+  const userDetails = props.userDetails;
   const [locality, updateLocality] = useState('');
-  const [recieverName, updateRecieverName] = useState(userDetail.c_fname);
-  const [recieverContact, updateRecieverContact] = useState(userDetail.c_contactno);
+  const [receiverName, updateReceiverName] = useState(userDetails.name);
+  const [receiverContact, updateReceiverContact] = useState(userDetails.contactno);
   const [city, updateCity] = useState(null);
   const [state, updateState] = useState(null);
   const [pin, updatePin] = useState(null);
   const [addNewAddress, updateAddNewAddress] = useState(false);
-
   const dispatch = useDispatch();
   const onAddressDelete = (key) => {
-    userDetail.c_addresses.splice(key, 1);
+    userDetails.addresses.splice(key, 1);
     dispatch({
       type: 'UPDATE_ADDRESS',
-      payload: userDetail.c_addresses
+      payload: userDetails.addresses
     });
+    dispatch({
+      type: 'UPDATE_ADDRESS',
+      payload: userDetails.addresses
+    });
+    axios.post('http://localhost:5000/api/v1/auth/updateUser', {
+      ...userDetails
+    }).then(function (){}).catch(function (){});
   }
   const onAddressAdd = () => {
-    if( recieverName && recieverContact && city && pin && state && locality) {
-      userDetail.c_addresses.push({
-        c_recieverName: recieverName,
-        c_recieverContact: recieverContact,
-        c_city: city,
-        c_pin: pin,
-        c_state: state,
-        c_address: locality
+    if( receiverName && receiverContact && city && pin && state && locality) {
+      userDetails.addresses.push({
+        receiverName: receiverName,
+        receiverContact: receiverContact,
+        city: city,
+        pin: pin,
+        state: state,
+        address: locality
       });
       dispatch({
         type: 'UPDATE_ADDRESS',
-        payload: userDetail.c_addresses
+        payload: userDetails.addresses
       });
+      axios.post('http://localhost:5000/api/v1/auth/updateUser', {
+        ...userDetails
+      }).then(function (){}).catch(function (){});
+    }
+  }
+  const onGenderUpdate = (gender) => {
+    if (gender) {
+      dispatch({
+        type: 'UPDATE_GENDER',
+        payload: gender
+      });
+      axios.post('http://localhost:5000/api/v1/auth/updateUser', {
+        ...userDetails
+      }).then(function (){}).catch(function (){});
     }
   }
   return(
@@ -91,7 +116,7 @@ export default function EditProfile(props){
             <Header as='h4'>Name: </Header>
           </Grid.Column>
           <Grid.Column width={2}>
-            <Input value={userDetail.c_fname} disabled/>
+            <Input value={userDetails.name} disabled/>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
@@ -99,7 +124,7 @@ export default function EditProfile(props){
             <Header as='h4'>Contact: </Header>
           </Grid.Column>
           <Grid.Column width={2}>
-            <Input value={userDetail.c_contactno} disabled/>
+            <Input value={userDetails.contactno} disabled/>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
@@ -111,14 +136,14 @@ export default function EditProfile(props){
               placeholder='Select gender'
               selection
               options={genderOptions}
-              value={userDetail.c_gender}
-              disabled
+              value={userDetails.gender}
+              onChange={(e, data)=>onGenderUpdate(data.value)}
             />
           </Grid.Column>
         </Grid.Row>
         <Header as="h3">Address: </Header>
         <Grid.Row>
-          {userDetail.c_addresses.map((address, index) => <Address key={index} addrIndex={index} onAddressDelete={onAddressDelete} address={address}/>)}
+          {userDetails.addresses.map((address, index) => <Address key={index} addrIndex={index} onAddressDelete={onAddressDelete} receiverAddress={address}/>)}
         </Grid.Row>  
         <Grid.Row>
           <Grid.Column width={2}>
@@ -137,7 +162,7 @@ export default function EditProfile(props){
                     <Header as="h5">Reciever's name</Header>
                   </Grid.Column>
                   <Grid.Column width={2}>
-                    <Input required value={recieverName} onChange={(e, data)=>{updateRecieverName(data.value)}}/>
+                    <Input required value={receiverName} onChange={(e, data)=>{updateReceiverName(data.value)}}/>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
@@ -147,7 +172,7 @@ export default function EditProfile(props){
                     <Header as="h5">Reciever's contact</Header>
                   </Grid.Column>
                   <Grid.Column width={2}>
-                    <Input required value={recieverContact} onChange={(e, data)=>{updateRecieverContact(data.value)}}/>
+                    <Input required value={receiverContact} onChange={(e, data)=>{updateReceiverContact(data.value)}}/>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>

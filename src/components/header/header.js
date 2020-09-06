@@ -3,7 +3,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import jwt from 'jsonwebtoken';
+import  { LOGIN_API, SIGNUP_API } from '../../utils/constants';
 
+const findAuthMessage = (loginState) => {
+  if (loginState === 'failed') return <span style={{color: 'red'}}> Login Failed</span>;
+  if (loginState === 'password mismatch') return <span style={{color: 'red'}}> The password does not match</span>;
+  if (loginState === 'sign-up failed') return <span style={{color: 'red'}}> sign-up failed</span>;
+
+}
 const mapStateToProps = (state, ownProps) => {
   return {
     activeUser: state.activeUser
@@ -12,16 +20,16 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    signInActiveUser: userDetail => {
+    signInActiveUser: userDetails => {
       dispatch({
         type: 'ADD_ACTIVE_USER',
-        payload: userDetail
+        payload: userDetails
       });
     },
-    signOutActiveUser: userDetail => {
+    signOutActiveUser: () => {
       dispatch({
         type: 'ADD_ACTIVE_USER',
-        payload: userDetail
+        payload: null
       });
     }
   }
@@ -31,9 +39,15 @@ class Header extends React.Component {
   constructor(){
     super();
     this.state = {
-      userName: '',
+      email: '',
       password: '',
-      isLoginModal: true,
+      signUpDetails: {
+        fullName: '',
+        email: '',
+        contactNo: '',
+        password: '',
+        rePassword: ''
+      },
       successFulEntry: 'in progress',
       modalState: {
         isOpen: false,
@@ -41,70 +55,74 @@ class Header extends React.Component {
       }
     };
   }
-  VerifysignIn() {
+  VerifyAuth() {
     const state = this.state,
       that = this;
-    if (state.userName){
-      if (state.password) {
-        this.setState({successFulEntry: 'sending'});
+    if (state.modalState.isLogin) {
+      // sign in flow
+      if (state.email && state.password) {
+        this.setState({successFulEntry: 'loading'});
         axios.post('http://localhost:5000/api/v1/auth/login', {
-          "email": state.userName,
+          "email": state.email,
           "password": state.password
         })
         .then(function (response){
           if (response.data.success) {
+            let token = response.data.token;
+            token = token.replace('Bearer', '');
+            token = token.trim();
+            let data = jwt.decode(token);
             that.props.signInActiveUser({
-              "name": "Sourav Debnath",
-              "avatar": "//www.gravatar.com/avatar/9d9d58a0780d938cba1da99ddd7353a3?s=200&r=pg&d=mm",
-              c_fname: "Sourav Debnath",
-              c_email: "sourav2012d@gmal.com",
-              c_contactno: "8981692691",
-              c_addresses: [{
-                c_recieverName: 'Debu1',
-                c_recieverContact: '9900990099',
-                c_city: "Chnandernagore",
-                c_pin: "712137",
-                c_state: "West bengal",
-                c_address: "dinemar danga, cgr"
-              },
-              {
-                c_recieverName: 'Debu2',
-                c_recieverContact: '9900990099',
-                c_city: "Chnandernagore",
-                c_pin: "712137",
-                c_state: "West bengal",
-                c_address: "dinemar danga, cgr"
-              },
-              {
-                c_recieverName: 'Debu3',
-                c_recieverContact: '9900990099',
-                c_city: "Chnandernagore",
-                c_pin: "712137",
-                c_state: "West bengal",
-                c_address: "dinemar danga, cgr"
-              }],
-              c_gender: "male",
-              c_usertype: "u3"
+              ...data.userDetails
             });
-            that.setState({modalState: {...state.modalState, isOpen: false, successFulEntry: 'in progress'}});
+            that.setState({successFulEntry: 'sucess', modalState: {...state.modalState, isOpen: false}});
           } else {
-            that.setState({modalState: {...state.modalState, isOpen: false, successFulEntry: 'in progress'}});
+            that.setState({ successFulEntry: 'in progress', modalState: {...state.modalState, isOpen: false}});
           }
         })
         .catch(function (error) {
           that.setState({successFulEntry: 'failed'});
         });
-      } else {
-
       }
     } else {
+      // sign up flow
+      let signUpDetails = state.signUpDetails,
+        fullName = signUpDetails.fullName,
+        email = signUpDetails.email,
+        contactNo = signUpDetails.contactNo,
+        pass =  signUpDetails.password,
+        rePass = signUpDetails.rePassword;
+
+      if (fullName && email && contactNo && pass && rePass) {
+        if (pass !== rePass) {
+          that.setState({successFulEntry: 'password mismatch'});
+          return;
+        }
+        this.setState({successFulEntry: 'loading'});
+        axios.post('http://localhost:5000/api/v1/auth/register', {
+          "name": fullName,
+          "email": email,
+          "contactno": contactNo,
+          "password": pass
+        }).then(function(response){
+          if (response.data) {
+            that.setState({successFulEntry: 'sucess', modalState: {...state.modalState, isOpen: false}});
+          } else {
+            that.setState({ successFulEntry: 'in progress', modalState: {...state.modalState, isOpen: false}});
+          }
+        }).catch(function(err){
+          that.setState({successFulEntry: 'sign-up failed'});
+        });
+      }
+
 
     }
+
   }
   render() {
     const activeItem = this.props.headerSelected;
     const modalState = this.state.modalState;
-    const activeUser = this.props.activeUser.activeUser;
+    const activeUser = this.props.activeUser.userDetails;
 
     return (
       <div className="de-sticky-header-wrapper">
@@ -146,9 +164,9 @@ class Header extends React.Component {
                 <Image src='/resources/bag.svg'/>
               </Link>
             </Menu.Item>
-            <Menu.Item>
+            {/* <Menu.Item>
             <Image src='/resources/wishlist.svg'/>
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item as="a">
               <Popup 
                 hoverable 
@@ -162,26 +180,30 @@ class Header extends React.Component {
                 {
                   activeUser ?
                   <>
-                  <Button onClick={()=>{this.props.signOutActiveUser(null)}}>Logout</Button>
-                  <Link to="/user/profile">
-                    <a>Visit your Profile</a>
-                  </Link>
+                    <Link to="/">
+                      <Button onClick={this.props.signOutActiveUser}>Logout</Button>
+                    </Link>
+                    <Link to="/user/profile">
+                      <a>Visit your Profile</a>
+                    </Link>
                   </>
                   :
                   <>
                     <span>To access account and manage orders</span>
-                    <div>
+                    <div style={{ display: 'flex'}}>
                       <Button
                         icon='sign-in'
                         color='teal'
                         content='Sign in'
-                        onClick={() => this.setState({ isLoginModal: true, modalState: {...modalState, isOpen: true,isLogin: true }})}
+                        size='medium'
+                        onClick={() => this.setState({ modalState: {...modalState, isOpen: true,isLogin: true } })}
                       />
                       <Button
                         icon='signup'
                         color='blue'
                         content='Sign up'
-                        onClick={() => this.setState({ isLoginModal: false, modalState: {...modalState, isOpen: true, isLogin: false}})}
+                        size='medium'
+                        onClick={() => this.setState({ modalState: {...modalState, isOpen: true, isLogin: false} })}
                       />
                     </div>  
                   </>
@@ -225,20 +247,16 @@ class Header extends React.Component {
           open={modalState.isOpen}
           onClose={() => this.setState({modalState: {...modalState, isOpen: false}})}
           >
-            <Modal.Header> {this.state.isLoginModal ? 'Login' : 'SignUp' }</Modal.Header>
+            <Modal.Header> {modalState.isLogin ? 'Login' : 'SignUp' }</Modal.Header>
             <Modal.Content>
-              <form onSubmit={(e)=>{ this.VerifysignIn(); e.preventDefault();}}>
+              <form onSubmit={(e)=>{e.preventDefault();}}>
                 <span>Please enter your details: </span>
-                {this.state.successFulEntry ==='failed'
-                  ?
-                  <span style={{color: 'red'}}> Login Failed</span>
-                  : ''
-                }
+                {findAuthMessage(this.state.successFulEntry)}
                 {modalState.isLogin ?
                   <Grid columns={1}>
                     <Grid.Row>
                       <Grid.Column>
-                        <Input required onChange={(e, data)=> { this.setState({userName: data.value});}} fluid icon='user' iconPosition='left' placeholder='Please enter your user name' />
+                        <Input type="email" required onChange={(e, data)=> { this.setState({email: data.value});}} fluid icon='mail' iconPosition='left' placeholder='Please enter your email id' />
                       </Grid.Column>
                     </Grid.Row>
                     <Grid.Row> 
@@ -251,22 +269,27 @@ class Header extends React.Component {
                   <Grid columns={1}>
                     <Grid.Row>
                       <Grid.Column>
-                        <Input required fluid icon='mail' iconPosition='left' placeholder='Please enter your email id' />
+                        <Input required onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, fullName: data.value}});}} fluid icon='user' iconPosition='left' placeholder='Please enter your full name' />
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column>
+                        <Input required type="email" onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, email: data.value}});}} fluid icon='mail' iconPosition='left' placeholder='Please enter your email id' />
                       </Grid.Column>  
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column>
-                        <Input required type="number" fluid icon='mobile' iconPosition='left' placeholder='Please enter your mobile number' />
+                        <Input required onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, contactNo: data.value}});}} type="number" fluid icon='mobile' iconPosition='left' placeholder='Please enter your contact number' />
                       </Grid.Column>  
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column>
-                        <Input required type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
+                        <Input required onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, password: data.value}});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
                       </Grid.Column>  
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column>
-                        <Input required type="password" fluid icon='user secret' iconPosition='left' placeholder='Please confirm your password' />
+                        <Input required onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, rePassword: data.value}});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please confirm your password' />
                       </Grid.Column>  
                     </Grid.Row> 
                   </Grid>
@@ -276,8 +299,8 @@ class Header extends React.Component {
                   <Button secondary onClick={() => this.setState({modalState: {...modalState, isOpen: false}})}>
                     cancel
                   </Button>
-                  <Button loading={this.state.successFulEntry === 'loading'} primary onClick={() => {this.VerifysignIn();}}>
-                    Sign in
+                  <Button loading={this.state.successFulEntry === 'loading'} primary onClick={() => {this.VerifyAuth();}}>
+                    {modalState.isLogin ? 'Sign in' : 'Sign up'}
                   </Button>
                 </div>  
               </form>

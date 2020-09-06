@@ -1,10 +1,15 @@
-const defaultUser = {activeUser: null};
+const defaultUser = {userDetails: null};
 export default function activeUserReducer(state = defaultUser, action) {
   switch(action.type) {
-    case 'ADD_ACTIVE_USER': return {...state, activeUser: action.payload};
+    case 'ADD_ACTIVE_USER': return {...state, userDetails: action.payload};
     case 'UPDATE_ADDRESS': {
       let tmpState = { ...state };
-      tmpState.activeUser.c_addresses = action.payload;
+      tmpState.userDetails.addresses = action.payload;
+      return tmpState;
+    }
+    case 'UPDATE_GENDER': {
+      let tmpState = { ...state };
+      tmpState.userDetails.gender = action.payload;
       return tmpState;
     }
     default:

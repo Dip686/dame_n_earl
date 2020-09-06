@@ -16,12 +16,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 class UserProfile extends React.Component {
   state = {
-      userDetail: this.props.activeUser.activeUser,
-      activeCategory: 'profile'
+    userDetails: this.props.activeUser.userDetails,
+    activeCategory: 'profile'
   };
   handleItemClick = (e, { name }) => this.setState({ activeCategory: name });
   render() {
-    const userDetail = this.state.userDetail,
+    const userDetails = this.state.userDetails,
       activeCategory = this.state.activeCategory;
     return(
       <Grid className="de-userprofile">
@@ -45,7 +45,7 @@ class UserProfile extends React.Component {
             </Grid.Column>
             <Grid.Column width={13}>
               {
-                <EditProfile userDetail = {userDetail} />
+                <EditProfile userDetails = {userDetails} />
               }
             </Grid.Column>
           </Grid.Row>
