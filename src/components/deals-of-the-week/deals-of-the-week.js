@@ -10,16 +10,16 @@ export default class DealsOfTheDay extends React.Component{
         <Grid columns={4}>
           <Grid.Row>
             <Grid.Column width={4}>
-            <Image className="de-deals-of-the-week" src='resources/deals-of-the-week/buy1get1.jpeg'/>
+              <Image fluid className="de-deals-of-the-week" src='resources/deals-of-the-week/buy1get1.jpeg'/>
             </Grid.Column>
             <Grid.Column width={4}>
-            <Image className="de-deals-of-the-week" src='resources/deals-of-the-week/oxidisedearrings.jpeg'/>
+              <Image fluid className="de-deals-of-the-week" src='resources/deals-of-the-week/oxidisedearrings.jpeg'/>
             </Grid.Column>
             <Grid.Column width={4}>
-              <Image className="de-deals-of-the-week" src='resources/deals-of-the-week/firstTimeUser.png'/>
+              <Image fluid className="de-deals-of-the-week" src='resources/deals-of-the-week/firstTimeUser.png'/>
             </Grid.Column>
             <Grid.Column width={4}>
-              <Image className="de-deals-of-the-week" src='resources/deals-of-the-week/off.jpeg'/>
+              <Image fluid className="de-deals-of-the-week" src='resources/deals-of-the-week/off.jpeg'/>
             </Grid.Column>
           </Grid.Row>
         </Grid>

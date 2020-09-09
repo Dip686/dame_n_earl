@@ -7,7 +7,7 @@ export default class EyeCatcher extends React.Component{
     return(
       <div className="de-eye-catcher-wrapper">
         <div className="de-eye-catcher-container">
-          <Image className="de-eye-catcher" src='resources/eye-catcher/free_delivery.jpeg'/>
+          <Image className="de-eye-catcher" src='resources/eye-catcher/free_delivery.png'/>
         </div>
       </div>  
     );

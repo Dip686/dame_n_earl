@@ -13,9 +13,11 @@ export default class Home extends React.Component{
         backgroundColor: '#fbfbfb'
       }}>
         <Poster />
-        <EyeCatcher />
+        {/* <EyeCatcher /> */}
         <DealsOfTheDay />
         <Categories />
+        <br/>
+        <br/>
         <DigitalIndia/>
       </div>  
     );

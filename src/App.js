@@ -22,8 +22,6 @@ function App() {
             <WebContainer>
               <Header headerSelected={headerSelected} setHeaderSelected={setHeaderSelected} />
               <Body headerSelected={headerSelected} />
-              <br/>
-              <br/>
               <Footer/>
             </WebContainer>
           </BrowserRouter>

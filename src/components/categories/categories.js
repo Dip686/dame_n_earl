@@ -28,16 +28,16 @@ export default class Categories extends React.Component{
         <Grid columns={4}>
           <Grid.Row>
             <Grid.Column width={4}>
-              <img alt="Indian Wear" src="resources/categories/indian-wear.jpeg" />
+              <Image fluid className="de-categories-to-bag" alt="Indian Wear" src="resources/categories/indian-wear.jpeg" />
             </Grid.Column>
             <Grid.Column width={4}>
-              <img alt="Earrings" src="resources/categories/earings.jpeg" /> 
+              <Image fluid className="de-categories-to-bag" alt="Earrings" src="resources/categories/earings.jpeg" /> 
             </Grid.Column>
             <Grid.Column width={4}>
-              <img alt="Hair Accessories" src="resources/categories/hair-accessories.jpeg" />
+              <Image fluid className="de-categories-to-bag" alt="Hair Accessories" src="resources/categories/hair-accessories.jpeg" />
             </Grid.Column>
             <Grid.Column width={4}>
-            <img alt="Nose Pins" src="resources/categories/nose-pins.jpeg" /> 
+              <Image fluid className="de-categories-to-bag" alt="Nose Pins" src="resources/categories/nose-pins.jpeg" /> 
             </Grid.Column>
           </Grid.Row>
         </Grid>
