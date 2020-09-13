@@ -1,9 +1,16 @@
 import React from 'react';
 import { Grid, Button, Icon, Label, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class ProductAction extends React.Component {
+const mapStateToProps = (state, ownProps) => {
+  return {
+    activeUser: state.activeUser
+  }
+};
+class ProductAction extends React.Component {
   render(){
+    const userDetails = this.props.activeUser.userDetails;
     return(
       <Grid>
         <Grid.Row>
@@ -11,7 +18,7 @@ export default class ProductAction extends React.Component {
         </Grid.Row>
         
         <Grid.Row>
-        <Link to="/shop/buy" style={{display: 'block', width: '100%'}}>
+        <Link to={ userDetails ? '/shop/buy': '#'} style={{display: 'block', width: '100%'}}>
           <Button className="de-product-action-button" fluid as='div' labelPosition='right'>
             <Button color='green'>
               <Icon name='box' />
@@ -21,13 +28,13 @@ export default class ProductAction extends React.Component {
             </Label>
           </Button>
          </Link> 
-          <Link to="/shop/cart" style={{display: 'block', width: '100%'}}>
+          <Link to={ userDetails ? '/shop/cart': '#'} style={{display: 'block', width: '100%'}}>
             <Button className="de-product-action-button" fluid as='div' labelPosition='right'>
               <Button color='blue'>
                 <Icon name='cart' />
               </Button>
               <Label className="de-product-action-label" as='div' basic color='blue' pointing='left'>
-                Add to your cart
+                Add to cart
               </Label>
             </Button>
           </Link>  
@@ -44,3 +51,4 @@ export default class ProductAction extends React.Component {
     );
   }
 }
+export default connect(mapStateToProps, null)(ProductAction);

@@ -40,6 +40,9 @@ export default class Body extends React.Component{
             <Route exact path="/user/profile">
               <UserProfile />
             </Route>
+            <Route exact path="/user/buy">
+              <UserProfile />
+            </Route>
             <Route exact path="/">
               <Home />
             </Route>

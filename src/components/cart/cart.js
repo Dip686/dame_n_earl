@@ -48,7 +48,7 @@ class Cart extends React.Component {
   generateCartItem  = (productDetail, key, totalItems) => {
     const cartDetails = this.props.cartDetails;
     return (
-      <Grid columns={3}>
+      <Grid columns={3} className='nullify-grid-margin'>
         <Grid.Row>
           <Grid.Column width={4}>
             <Image size="small" fluid src={productDetail.url} />
@@ -118,12 +118,8 @@ class Cart extends React.Component {
       {
         totalItems ?
         <Grid columns={3} style={{marginLeft: '2rem'}}>
-          <Grid.Column width={10} className="de-custom-card" style={{ height: '90vh', overflow: 'scroll', scrollbarWidth:'none'}}>
-            <div style={{
-                marginTop: '-12.5px',
-                marginLeft: '-7px',
-                marginRight:'-7px',
-                marginBottom: '12.5px',
+          <Grid.Column width={10} className="de-custom-card cart-wrapper">
+            <div class='nullify-grid-margin' style={{
                 backgroundColor:'#f9f9db',
                 borderBottom: '1px solid grey'
               }}>

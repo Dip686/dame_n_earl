@@ -261,7 +261,7 @@ class Header extends React.Component {
                     </Grid.Row>
                     <Grid.Row> 
                       <Grid.Column>
-                        <Input required onChange={(e, data)=> { this.setState({password: data.value});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
+                        <Input required onChange={(e, data)=> { let payload = data.value; this.setState({password: jwt.sign(payload, 'encryptedtokenblabla')});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
                       </Grid.Column>  
                     </Grid.Row> 
                   </Grid>  
@@ -284,12 +284,12 @@ class Header extends React.Component {
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column>
-                        <Input required onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, password: data.value}});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
+                        <Input required onChange={(e, data)=> { let payload= data.value; this.setState({ signUpDetails: {...this.state.signUpDetails, password: jwt.sign(payload, 'encryptedtokenblabla')}});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
                       </Grid.Column>  
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column>
-                        <Input required onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, rePassword: data.value}});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please confirm your password' />
+                        <Input required onChange={(e, data)=> { let payload= data.value; this.setState({ signUpDetails: {...this.state.signUpDetails, rePassword: jwt.sign(payload, 'encryptedtokenblabla')}});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please confirm your password' />
                       </Grid.Column>  
                     </Grid.Row> 
                   </Grid>

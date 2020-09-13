@@ -203,3 +203,16 @@ html, body, #root {
 .de-categories-to-bag {
   height: 40vh !important;
 }
+.cart-wrapper {
+  max-height: 90vh;
+  overflow: scroll;
+  scrollbar-width: none !important;
+  margin-bottom: 5%;
+  padding: 0 !important;
+}
+.cart-wrapper::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+}
+.nullify-grid-margin {
+  margin: 0 !important;
+}
