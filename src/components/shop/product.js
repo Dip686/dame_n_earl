@@ -1,32 +1,49 @@
-import React from 'react';
-import { Grid, Image, Header, Rating, Icon, Divider } from 'semantic-ui-react';
-import UserReview from '../user-reviews/user-review';
-import ProductAction from '../product-action/product-action';
-import { connect } from 'react-redux';
-
+import React from "react";
+import { Grid, Image, Header, Rating, Icon, Divider } from "semantic-ui-react";
+import UserReview from "../user-reviews/user-review";
+import ProductAction from "../product-action/product-action";
+import { connect } from "react-redux";
 
 class Product extends React.Component {
-  render(){
+  render() {
     const productDetails = this.props.pId.activeProduct;
-    const currency = productDetails.currency.toLowerCase() === 'rupee' ? '₹' : '₹';
-    return(
+    const currency =
+      productDetails.currency.toLowerCase() === "rupee" ? "₹" : "₹";
+    return (
       <Grid columns={2}>
         <Grid.Row>
           <Grid.Column width={6}>
-            <Image src={productDetails.url}/>
+            <Image src={productDetails.url} />
           </Grid.Column>
           <Grid.Column width={7}>
             <Header as="h2">Gold Plated Earrings -The Diva Collection</Header>
-            <Rating icon='heart' defaultRating={productDetails.rating} maxRating={productDetails.maxRating} disabled />
+            <Rating
+              icon="heart"
+              defaultRating={productDetails.rating}
+              maxRating={productDetails.maxRating}
+              disabled
+            />
             <span className="de-ratings-summary">212 Ratings</span>
             <span>|</span>
             <span className="de-review-summary">55 Reviews</span>
             <div className="de-product-price-details">
               Price:
-              <span className="de-product-price-details-currency">{currency}</span>
-              <span className="de-product-price-details-current-price">{productDetails.currentPrice}</span>
-              <span className="de-product-price-details-old-price">{currency}{productDetails.price}</span>
-              <span className="de-product-price-details-savings"> Save {currency}{productDetails.price - productDetails.currentPrice} ({productDetails.discount}%) </span>
+              <span className="de-product-price-details-currency">
+                {currency}
+              </span>
+              <span className="de-product-price-details-current-price">
+                {productDetails.currentPrice}
+              </span>
+              <span className="de-product-price-details-old-price">
+                {currency}
+                {productDetails.price}
+              </span>
+              <span className="de-product-price-details-savings">
+                {" "}
+                Save {currency}
+                {productDetails.price - productDetails.currentPrice} (
+                {productDetails.discount}%){" "}
+              </span>
             </div>
             <Header as="h4">Product Description</Header>
             <ul>
@@ -46,10 +63,10 @@ class Product extends React.Component {
             </div> */}
           </Grid.Column>
           <Grid.Column width={2}>
-            <ProductAction />
+            <ProductAction productDetails={productDetails} />
           </Grid.Column>
         </Grid.Row>
-        <Divider/>
+        <Divider />
         {/* <Grid.Row className="de-product-comments">
           <Grid.Column>
             <UserReview productDetails={productDetails} />
@@ -62,8 +79,8 @@ class Product extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    pId: state.activeProduct
-  }
-}
+    pId: state.activeProduct,
+  };
+};
 
 export default connect(mapStateToProps, null)(Product);
