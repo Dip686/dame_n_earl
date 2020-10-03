@@ -4,6 +4,8 @@ import Shop from '../shop/shop';
 import Product from  '../shop/product';
 import UserProfile from  '../userProfile/userProfile';
 import Cart from  '../cart/cart';
+import { GET_HAIR_ACESSORIES_LOCAL } from '../../utils/constants';
+import axios from 'axios';
 
 import {
   Switch,
@@ -18,7 +20,15 @@ function getViz(headerSelected) {
   }
 }
 export default class Body extends React.Component{
+  componentDidMount() {
+    axios.post(GET_HAIR_ACESSORIES_LOCAL,{
 
+    }).then(function getHairAccessoriesSuccess(){
+      
+    }).catch(function getHairAccessoriesError(){
+      console.log('Failed to load hair accessories details');
+    });
+  }
   render(){
     const headerSelected = this.props.headerSelected;
     return(

@@ -128,7 +128,7 @@ class Header extends React.Component {
       <div className="de-sticky-header-wrapper">
         <Menu size='large' className="de-header" secondary pointing>
           <Menu.Item style={{padding: '0'}}>
-            <Image height="32" width="200" src="resources/logo/logo.png" />
+            <Image className='de-logo' src="resources/logo/logo.png" />
           </Menu.Item>
           <Link to='/home'>
             <Menu.Item

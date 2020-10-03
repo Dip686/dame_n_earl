@@ -16,7 +16,7 @@ export default class DealsOfTheDay extends React.Component{
               <Image fluid className="de-deals-of-the-week" src='resources/deals-of-the-week/oxidisedearrings.jpeg'/>
             </Grid.Column>
             <Grid.Column width={4}>
-              <Image fluid className="de-deals-of-the-week" src='resources/deals-of-the-week/firstTimeUser.png'/>
+              <Image fluid className="de-deals-of-the-week" src='resources/deals-of-the-week/firstTimeUser.jpeg'/>
             </Grid.Column>
             <Grid.Column width={4}>
               <Image fluid className="de-deals-of-the-week" src='resources/deals-of-the-week/off.jpeg'/>
