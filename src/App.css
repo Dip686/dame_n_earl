@@ -1,7 +1,9 @@
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
 }
-.de-body{
+.de-body {
   padding-top: 5rem;
 }
 .de-shop {
@@ -18,44 +20,44 @@ html, body, #root {
 }
 .de-custom-card {
   background: #fff;
-  border-radius: .28571429rem;
+  border-radius: 0.28571429rem;
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-  transition: box-shadow .1s ease,transform .1s ease;
-  padding: .875em .5em !important;
+  transition: box-shadow 0.1s ease, transform 0.1s ease;
+  padding: 0.875em 0.5em !important;
 }
 .de-custom-address {
   background: #fff;
-  border-radius: .28571429rem;
+  border-radius: 0.28571429rem;
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-  padding: .875em .5em !important;
+  padding: 0.875em 0.5em !important;
   margin: 1rem;
 }
-.de-sticky-header-wrapper{
+.de-sticky-header-wrapper {
   background: white;
-    width: 100%;
-    position: fixed;
-    z-index: 11;
+  width: 100%;
+  position: fixed;
+  z-index: 11;
 }
-.de-header{
+.de-header {
   margin-bottom: 0 !important;
 }
 
-.de-poster-text{
+.de-poster-text {
   position: absolute;
   z-index: 10;
 }
-.de-poster-image{
+.de-poster-image {
   width: 100%;
   height: auto;
 }
-.de-poster-heading{
+.de-poster-heading {
   margin-left: 5% !important;
   margin-top: 7% !important;
   line-height: 45px;
   font-size: 45px;
   color: #e2384d;
 }
-.de-poster-subheading{
+.de-poster-subheading {
   margin-left: 5% !important;
   line-height: 25px;
   font-size: 25px;
@@ -68,11 +70,11 @@ html, body, #root {
   padding-right: 7%;
   background: #fdf7f0 !important;
 }
-.de-deals-of-the-week-container{
+.de-deals-of-the-week-container {
   display: flex;
   justify-content: space-between;
 }
-.de-deals-of-the-week{
+.de-deals-of-the-week {
   height: auto !important;
 }
 .de-eye-catcher-wrapper {
@@ -81,13 +83,13 @@ html, body, #root {
   padding-right: 7%;
   height: 250px;
 }
-.de-payment-supported-app{
+.de-payment-supported-app {
   width: 120px;
   height: 100px;
   display: inline !important;
   border-radius: 50px;
 }
-.de-payment-supported-container{
+.de-payment-supported-container {
   background: #f7f7f7;
   padding: 1% !important;
 }
@@ -106,12 +108,12 @@ html, body, #root {
 .de-catergory-wrapper {
   width: 19%;
 }
-.de-btm-eye-catcher-wrapper{
+.de-btm-eye-catcher-wrapper {
   padding: 2%;
   padding-left: 7%;
   padding-right: 7%;
 }
-.de-btm-eye-catcher-container{
+.de-btm-eye-catcher-container {
   display: flex;
   justify-content: space-between;
 }
@@ -131,21 +133,21 @@ html, body, #root {
   cursor: pointer;
 }
 
-.de-item-currency{
+.de-item-currency {
   color: #33b0b0;
   font-size: 17px;
 }
-.de-item-current-price{
+.de-item-current-price {
   color: #33b0b0;
   font-size: 18px;
 }
-.de-item-old-price{
+.de-item-old-price {
   color: #828282;
   font-size: 12px;
   padding: 4px;
   text-decoration: line-through;
 }
-.de-item-savings{
+.de-item-savings {
   color: #3c3e01;
   font-size: 12px;
   font-weight: bold;
@@ -156,7 +158,6 @@ html, body, #root {
   border-radius: 1px solid black;
   padding-right: 10px;
   padding-left: 10px;
-
 }
 .de-review-summary {
   color: #009082;
@@ -165,12 +166,12 @@ html, body, #root {
   padding-right: 10px;
   padding-left: 10px;
 }
-.de-product-price-details{
+.de-product-price-details {
   color: #000077;
   margin-top: 15px;
   font-size: 20px;
 }
-.de-product-price-details-old-price{
+.de-product-price-details-old-price {
   text-decoration: line-through;
   font-size: 14px;
   padding-left: 5px;
@@ -179,22 +180,23 @@ html, body, #root {
   font-weight: 500;
 }
 
-.de-product-price-details-savings{
+.de-product-price-details-savings {
   color: #6b3d00;
   font-size: 15px;
   font-weight: bold;
 }
-.de-product-share-icon{
+.de-product-share-icon {
   margin-left: 5px !important;
   margin-right: 5px !important;
 }
-.de-product-comments{
+.de-product-comments {
   margin-left: 1%;
 }
 .de-product-action-label {
   width: 100%;
+  background-color: #5c035c !important;
 }
-.de-product-action-button{
+.de-product-action-button {
   margin-bottom: 8px !important;
 }
 .de-trash-icon {
@@ -213,7 +215,7 @@ html, body, #root {
   padding: 0 !important;
 }
 .cart-wrapper::-webkit-scrollbar {
-  width: 0px;  /* Remove scrollbar space */
+  width: 0px; /* Remove scrollbar space */
 }
 .nullify-grid-margin {
   margin: 0 !important;
