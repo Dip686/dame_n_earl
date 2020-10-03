@@ -36,7 +36,7 @@ function getPriceInfo(obj) {
   for (key in obj) {
       if (obj.hasOwnProperty(key)) {
         size++;
-        price += +obj[key].currentPrice;
+        price += +obj[key].currentPrice * obj[key].quantity;
       }
   }
   return [size, price];
