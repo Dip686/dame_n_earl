@@ -7,6 +7,7 @@ export default function Item(props) {
   const itemObj = props.itemObj;
   const history = useHistory();
   const dispatch = useDispatch();
+  const currency = itemObj.currency.toLowerCase() === 'rupee' ? '₹' : '₹';
   return (
     <Card className="de-items" onClick={()=> {history.push('/shop/product'); dispatch({ type: 'ADD_ACTIVE_ITEM', payload: itemObj})}}>
     <Image src={itemObj.url} wrapped ui={false} />
@@ -16,14 +17,14 @@ export default function Item(props) {
         <span className='date'>Joined in 2015</span>
       </Card.Meta> */}
       <Card.Description>
-        <span className="de-item-currency">{itemObj.currency}</span>
+    <span className="de-item-currency">{currency}</span>
         <span className="de-item-current-price">{itemObj.currentPrice}</span>
-        <span className="de-item-old-price">{itemObj.currency}{itemObj.price}</span>
-    <span className="de-item-savings"> Save {itemObj.currency}{itemObj.discountAmount} ({itemObj.discountPercentage}%) </span>
+        <span className="de-item-old-price">{currency}{itemObj.price}</span>
+    <span className="de-item-savings"> Save {currency}{itemObj.price - itemObj.currentPrice} ({itemObj.discount}%) </span>
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
-      <Rating icon='heart' defaultRating={itemObj.rating} maxRating={itemObj.maxRating} disabled />
+      <Rating icon='heart' defaultRating={itemObj.rating} maxRating={5} disabled />
     </Card.Content>
   </Card>
   );

@@ -4,13 +4,29 @@ import Shop from '../shop/shop';
 import Product from  '../shop/product';
 import UserProfile from  '../userProfile/userProfile';
 import Cart from  '../cart/cart';
-import { GET_HAIR_ACESSORIES_LOCAL } from '../../utils/constants';
+import { GET_HAIR_ACESSORIES_LOCAL, GET_INDIAN_WEAR_LOCAL, GET_EARRINGS_LOCAL } from '../../utils/constants';
 import axios from 'axios';
 
 import {
   Switch,
   Route
 } from "react-router-dom";
+import { connect } from 'react-redux';
+
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    setProductDetails: (category, items) => {
+      dispatch({
+        type: 'SET_PRODUCT_DETAILS',
+        payload: {
+          category,
+          items
+        }
+      });
+    }
+  }
+}
 
 function getViz(headerSelected) {
   switch(headerSelected) {
@@ -19,14 +35,37 @@ function getViz(headerSelected) {
     default: return <Home/>;
   }
 }
-export default class Body extends React.Component{
+class Body extends React.Component{
   componentDidMount() {
-    axios.post(GET_HAIR_ACESSORIES_LOCAL,{
+    // Hair Accessories
+    let bodyComponent = this;
+    axios.get(GET_HAIR_ACESSORIES_LOCAL,{
 
-    }).then(function getHairAccessoriesSuccess(){
-      
+    }).then(function getHairAccessoriesSuccess(response){
+      let attireDetails = response.data.attireDetails[0];
+      bodyComponent.props.setProductDetails(attireDetails.category, attireDetails.items);
     }).catch(function getHairAccessoriesError(){
       console.log('Failed to load hair accessories details');
+    });
+
+    // Indian Wear
+    axios.get(GET_INDIAN_WEAR_LOCAL,{
+
+    }).then(function getIndianWearSuccess(response){
+      let attireDetails = response.data.attireDetails[0];
+      bodyComponent.props.setProductDetails(attireDetails.category, attireDetails.items);
+    }).catch(function getIndianWearError(){
+      console.log('Failed to load indian wear details');
+    });
+
+    //Earrings
+    axios.get(GET_EARRINGS_LOCAL,{
+
+    }).then(function getEarringsSuccess(response){
+      let attireDetails = response.data.attireDetails[0];
+      bodyComponent.props.setProductDetails(attireDetails.category, attireDetails.items);
+    }).catch(function getEarringsError(){
+      console.log('Failed to load earrings details');
     });
   }
   render(){
@@ -62,3 +101,4 @@ export default class Body extends React.Component{
     );
   }
 }
+export default connect(null, mapDispatchToProps)(Body);

@@ -34,7 +34,7 @@ class Shop extends React.Component{
   render(){
     let { activeCategory, products, activePage } = this.props.products;
     let tmpActivePage = activePage - 1;
-    let totalItems = products[activeCategory].items.length;
+    let totalItems = products[activeCategory].length;
     let totalPages = Math.ceil(totalItems / 10);
     let startItemIndex = tmpActivePage * 10;
     let endItemIndex = Math.min(startItemIndex + 9, totalItems - 1);
@@ -46,20 +46,14 @@ class Shop extends React.Component{
             <Grid.Column width={3}>
               <Menu pointing vertical>
                 <Menu.Item
-                  name='indian_wear'
-                  active={activeCategory === 'indian_wear'}
+                  name='Indian_Wear'
+                  active={activeCategory === 'Indian_Wear'}
                   onClick={this.handleItemClick}
                 > Indian Wear
                 </Menu.Item>
                 <Menu.Item
-                  name='western_wear'
-                  active={activeCategory === 'western_wear'}
-                  onClick={this.handleItemClick}
-                >Western Wear
-                </Menu.Item>
-                <Menu.Item
-                  name='earrings'
-                  active={activeCategory === 'earrings'}
+                  name='Earrings'
+                  active={activeCategory === 'Earrings'}
                   onClick={this.handleItemClick}
                 >Earrings
                 </Menu.Item>

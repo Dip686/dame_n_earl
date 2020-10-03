@@ -12,6 +12,6 @@ function generateCards (start, end, items) {
 
 export default function ItemContainer(props) {
   const activeCategory = props.activeCategory,
-    items = props.products[activeCategory].items;
+    items = props.products[activeCategory];
   return <Card.Group>{generateCards(props.startIndex, props.endItemIndex, items)}</Card.Group>;
 }

@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 class Product extends React.Component {
   render(){
     const productDetails = this.props.pId.activeProduct;
+    const currency = productDetails.currency.toLowerCase() === 'rupee' ? '₹' : '₹';
     return(
       <Grid columns={2}>
         <Grid.Row>
@@ -22,10 +23,10 @@ class Product extends React.Component {
             <span className="de-review-summary">55 Reviews</span>
             <div className="de-product-price-details">
               Price:
-              <span className="de-product-price-details-currency">{productDetails.currency}</span>
+              <span className="de-product-price-details-currency">{currency}</span>
               <span className="de-product-price-details-current-price">{productDetails.currentPrice}</span>
-              <span className="de-product-price-details-old-price">{productDetails.currency}{productDetails.price}</span>
-              <span className="de-product-price-details-savings"> Save {productDetails.currency}{productDetails.discountAmount} ({productDetails.discountPercentage}%) </span>
+              <span className="de-product-price-details-old-price">{currency}{productDetails.price}</span>
+              <span className="de-product-price-details-savings"> Save {currency}{productDetails.price - productDetails.currentPrice} ({productDetails.discount}%) </span>
             </div>
             <Header as="h4">Product Description</Header>
             <ul>
