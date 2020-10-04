@@ -234,3 +234,31 @@ html, body, #root {
   width: 120px;
   padding-bottom: 8px;
 }
+.de-buy-flow {
+  padding: 0;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  background-color: #4286bf;
+  color: white !important;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 24px;
+  text-transform: uppercase;
+}
+.de-payment-info {
+  color: green;
+  margin-right: 12px;
+}
+.de-payment-info b {
+  color: black;
+}
+.de-buy-flow-container {
+  height: 63vh;
+}
+.de-buy-flow-content {
+  border: 1px solid #c4c1c1;
+  padding: 32px !important;
+  overflow: auto;
+  max-height: 30vh;
+}
