@@ -123,15 +123,15 @@ class BuyFlow extends React.Component {
               <Accordion.Content className='de-buy-flow-content' active={activeIndex === 2}>
                 <Grid columns={3}>
                   <Grid.Row>
-                    <Grid.Column width={5}>
+                    <Grid.Column width={6}>
                       <Header as="h4">PAYMENT INFO:</Header>
                       <span class="de-payment-info"> <b>Mobile:</b> 8981525065</span>
                       <span class="de-payment-info"> <b>UPI id:</b> dip686@icici</span>
                     </Grid.Column>
-                    <Grid.Column width={7}>
+                    <Grid.Column width={6}>
                       <Input fluid placeholder='Enter the payment Receipt ID' />
                     </Grid.Column>
-                    <Grid.Column width={3}>
+                    <Grid.Column width={4}>
                       <Button primary> Submit Payment Info</Button>
                     </Grid.Column>
                   </Grid.Row>
