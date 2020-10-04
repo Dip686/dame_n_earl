@@ -3,6 +3,7 @@ import Home from '../home/home';
 import Shop from '../shop/shop';
 import Product from  '../shop/product';
 import UserProfile from  '../userProfile/userProfile';
+import BuyFlow from '../buy-flow/buy-flow';
 import Cart from  '../cart/cart';
 import { GET_HAIR_ACESSORIES_LOCAL, GET_INDIAN_WEAR_LOCAL, GET_EARRINGS_LOCAL } from '../../utils/constants';
 import axios from 'axios';
@@ -89,8 +90,8 @@ class Body extends React.Component{
             <Route exact path="/user/profile">
               <UserProfile />
             </Route>
-            <Route exact path="/user/buy">
-              <UserProfile />
+            <Route exact path="/shop/buy">
+              <BuyFlow />
             </Route>
             <Route exact path="/">
               <Home />

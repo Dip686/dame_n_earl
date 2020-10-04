@@ -32,6 +32,7 @@ class Shop extends React.Component{
   handlePageChange = (e, data) => {this.props.updateActivePage(data.activePage);};
 
   render(){
+    console.log('inside shop render', this.props.products);
     let { activeCategory, products, activePage } = this.props.products;
     let tmpActivePage = activePage - 1;
     let totalItems = products[activeCategory].length;
