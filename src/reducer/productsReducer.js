@@ -1,6 +1,7 @@
 const defaultState = {
-  activeCategory: 'Indian_Wear',
-  activePage: 1
+  activeCategory: 'indian_wear',
+  activePage: 1,
+  products: {}
 };
 
 export default function getProducts(state = defaultState, action) {
