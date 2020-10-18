@@ -249,61 +249,58 @@ class Header extends React.Component {
           >
             <Modal.Header> {modalState.isLogin ? 'Login' : 'SignUp' }</Modal.Header>
             <Modal.Content>
-              <form onSubmit={(e)=>{e.preventDefault();}}>
-                <span>Please enter your details: </span>
-                {findAuthMessage(this.state.successFulEntry)}
-                {modalState.isLogin ?
-                  <Grid columns={1}>
-                    <Grid.Row>
-                      <Grid.Column>
-                        <Input type="email" required onChange={(e, data)=> { this.setState({email: data.value});}} fluid icon='mail' iconPosition='left' placeholder='Please enter your email id' />
-                      </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row> 
-                      <Grid.Column>
-                        <Input required onChange={(e, data)=> { let payload = data.value; this.setState({password: jwt.sign(payload, 'encryptedtokenblabla')});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
-                      </Grid.Column>  
-                    </Grid.Row> 
-                  </Grid>  
-                  :
-                  <Grid columns={1}>
-                    <Grid.Row>
-                      <Grid.Column>
-                        <Input required onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, fullName: data.value}});}} fluid icon='user' iconPosition='left' placeholder='Please enter your full name' />
-                      </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Column>
-                        <Input required type="email" onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, email: data.value}});}} fluid icon='mail' iconPosition='left' placeholder='Please enter your email id' />
-                      </Grid.Column>  
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Column>
-                        <Input required onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, contactNo: data.value}});}} type="number" fluid icon='mobile' iconPosition='left' placeholder='Please enter your contact number' />
-                      </Grid.Column>  
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Column>
-                        <Input required onChange={(e, data)=> { let payload= data.value; this.setState({ signUpDetails: {...this.state.signUpDetails, password: jwt.sign(payload, 'encryptedtokenblabla')}});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
-                      </Grid.Column>  
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Column>
-                        <Input required onChange={(e, data)=> { let payload= data.value; this.setState({ signUpDetails: {...this.state.signUpDetails, rePassword: jwt.sign(payload, 'encryptedtokenblabla')}});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please confirm your password' />
-                      </Grid.Column>  
-                    </Grid.Row> 
-                  </Grid>
-
-                }
-                <div style={{marginTop: '16px'}}>
-                  <Button secondary onClick={() => this.setState({modalState: {...modalState, isOpen: false}})}>
-                    cancel
-                  </Button>
-                  <Button loading={this.state.successFulEntry === 'loading'} primary onClick={() => {this.VerifyAuth();}}>
-                    {modalState.isLogin ? 'Sign in' : 'Sign up'}
-                  </Button>
-                </div>  
-              </form>
+              <span>Please enter your details: </span>
+              {findAuthMessage(this.state.successFulEntry)}
+              {modalState.isLogin ?
+                <Grid columns={1} style={{marginTop: '2px'}}>
+                  <Grid.Row>
+                    <Grid.Column>
+                      <Input type="email" required onChange={(e, data)=> { this.setState({email: data.value});}} fluid icon='mail' iconPosition='left' placeholder='Please enter your email id' />
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Grid.Column>
+                      <Input required onChange={(e, data)=> { let payload = data.value; this.setState({password: jwt.sign(payload, 'encryptedtokenblabla')});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+                :
+                <Grid columns={1} style={{marginTop: '2px'}}>
+                  <Grid.Row>
+                    <Grid.Column>
+                      <Input required onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, fullName: data.value}});}} fluid icon='user' iconPosition='left' placeholder='Please enter your full name' />
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Grid.Column>
+                      <Input required type="email" onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, email: data.value}});}} fluid icon='mail' iconPosition='left' placeholder='Please enter your email id' />
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Grid.Column>
+                      <Input required onChange={(e, data)=> { this.setState({ signUpDetails: {...this.state.signUpDetails, contactNo: data.value}});}} type="number" fluid icon='mobile' iconPosition='left' placeholder='Please enter your contact number' />
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Grid.Column>
+                      <Input required onChange={(e, data)=> { let payload= data.value; this.setState({ signUpDetails: {...this.state.signUpDetails, password: jwt.sign(payload, 'encryptedtokenblabla')}});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please enter your password' />
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Grid.Column>
+                      <Input required onChange={(e, data)=> { let payload= data.value; this.setState({ signUpDetails: {...this.state.signUpDetails, rePassword: jwt.sign(payload, 'encryptedtokenblabla')}});}} type="password" fluid icon='user secret' iconPosition='left' placeholder='Please confirm your password' />
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+              }
+              <div style={{marginTop: '16px'}}>
+                <Button secondary onClick={() => this.setState({modalState: {...modalState, isOpen: false}})}>
+                  cancel
+                </Button>
+                <Button loading={this.state.successFulEntry === 'loading'} primary onClick={() => {this.VerifyAuth();}}>
+                  {modalState.isLogin ? 'Sign in' : 'Sign up'}
+                </Button>
+              </div>
             </Modal.Content>
           </Modal>
       </div>
