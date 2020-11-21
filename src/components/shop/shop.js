@@ -47,14 +47,14 @@ class Shop extends React.Component{
             <Grid.Column width={3}>
               <Menu pointing vertical>
                 <Menu.Item
-                  name='Indian_Wear'
-                  active={activeCategory === 'Indian_Wear'}
+                  name='indian_wear'
+                  active={activeCategory === 'indian_wear'}
                   onClick={this.handleItemClick}
                 > Indian Wear
                 </Menu.Item>
                 <Menu.Item
-                  name='Earrings'
-                  active={activeCategory === 'Earrings'}
+                  name='earrings'
+                  active={activeCategory === 'earrings'}
                   onClick={this.handleItemClick}
                 >Earrings
                 </Menu.Item>
