@@ -32,13 +32,20 @@ class Shop extends React.Component{
   handlePageChange = (e, data) => {this.props.updateActivePage(data.activePage);};
 
   render(){
-    console.log('inside shop render', this.props.products);
-    let { activeCategory, products, activePage } = this.props.products;
-    let tmpActivePage = activePage - 1;
-    let totalItems = products[activeCategory].length;
-    let totalPages = Math.ceil(totalItems / 10);
-    let startItemIndex = tmpActivePage * 10;
-    let endItemIndex = Math.min(startItemIndex + 9, totalItems - 1);
+    let { activeCategory, products, activePage } = this.props.products,
+      tmpActivePage,
+      totalItems,
+      totalPages,
+      startItemIndex,
+      endItemIndex;
+
+    if (products[activeCategory]) {
+      tmpActivePage = activePage - 1;
+      totalItems = products[activeCategory].length;
+      totalPages = Math.ceil(totalItems / 10);
+      startItemIndex = tmpActivePage * 10;
+      endItemIndex = Math.min(startItemIndex + 9, totalItems - 1);
+    }
  
     return(
       <Grid className="de-shop">
