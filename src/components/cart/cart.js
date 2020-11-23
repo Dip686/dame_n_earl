@@ -119,7 +119,7 @@ class Cart extends React.Component {
         totalItems ?
         <Grid columns={3} style={{marginLeft: '2rem'}}>
           <Grid.Column width={10} className="de-custom-card cart-wrapper">
-            <div class='nullify-grid-margin' style={{
+            <div style={{
                 backgroundColor:'#f9f9db',
                 borderBottom: '1px solid grey'
               }}>

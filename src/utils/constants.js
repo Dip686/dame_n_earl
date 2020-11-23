@@ -8,9 +8,9 @@ export const GET_PRODUCT_API = 'http://ec2-3-16-36-117.us-east-2.compute.amazona
 export const GET_PRODUCT_API_LOCAL = 'http://localhost:5000/api/v1/products/getProductsDetails/';
 
 // all test local APIs
-export const GET_HAIR_ACESSORIES_LOCAL = GET_PRODUCT_API_LOCAL + 'Hair Accessories';
-export const GET_INDIAN_WEAR_LOCAL = GET_PRODUCT_API_LOCAL + 'Indian_Wear';
-export const GET_EARRINGS_LOCAL = GET_PRODUCT_API_LOCAL + 'Earrings';
+export const GET_HAIR_ACESSORIES_LOCAL = GET_PRODUCT_API_LOCAL + 'hair_accessories';
+export const GET_INDIAN_WEAR_LOCAL = GET_PRODUCT_API_LOCAL + 'indian_wear';
+export const GET_EARRINGS_LOCAL = GET_PRODUCT_API_LOCAL + 'earrings';
 
 
 // Auth API final
@@ -20,7 +20,7 @@ export const UPDATE_USER_DETAILS_API = AUTH_API + 'updateUser';
 
 
 // Product APIs
-export const GET_HAIR_ACESSORIES_API = GET_PRODUCT_API + 'Hair Accessories';
-export const GET_INDIAN_WEAR = GET_PRODUCT_API + 'Indian_Wear';
-export const GET_EARRINGS = GET_PRODUCT_API + 'Earrings';
+export const GET_HAIR_ACESSORIES_API = GET_PRODUCT_API + 'hair_accessories';
+export const GET_INDIAN_WEAR = GET_PRODUCT_API + 'indian_wear';
+export const GET_EARRINGS = GET_PRODUCT_API + 'earrings';
 
