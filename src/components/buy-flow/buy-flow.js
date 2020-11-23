@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 class BuyFlow extends React.Component {
-  state = { activeIndex: 2, deliveryAddressIndex: 0 };
+  state = { activeIndex: 0, deliveryAddressIndex: 0 };
   handleClick = (e, titleProps) => {
     const { index } = titleProps
     const { activeIndex } = this.state

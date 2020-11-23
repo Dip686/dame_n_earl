@@ -262,3 +262,20 @@ html, body, #root {
   overflow: auto;
   max-height: 30vh;
 }
+.order-actions-links {
+  cursor: pointer;
+  text-decoration: underline;
+  color: orange !important;
+}
+.de-track-info-status {
+  font-size: 12px;
+  font-weight: 700;
+}
+.de-track-info-status span {
+  font-weight: 600;
+  color: grey;
+  font-style: italic;
+}
+.de-track-info-detail {
+  font-size: 12px;
+}

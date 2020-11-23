@@ -16,17 +16,11 @@ function App() {
   const { store, persistor} = storeGenerator();
   return (
     <div className="App">
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
-            <WebContainer>
-              <Header headerSelected={headerSelected} setHeaderSelected={setHeaderSelected} />
-              <Body headerSelected={headerSelected} />
-              <Footer/>
-            </WebContainer>
-          </BrowserRouter>
-        </PersistGate>  
-      </Provider>
+      <WebContainer>
+        <Header headerSelected={headerSelected} setHeaderSelected={setHeaderSelected} />
+        <Body headerSelected={headerSelected} />
+        <Footer/>
+      </WebContainer>
     </div>
   );
 }

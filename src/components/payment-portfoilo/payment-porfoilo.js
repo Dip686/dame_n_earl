@@ -8,8 +8,8 @@ export default class PaymentPorfolio extends React.Component{
       <Grid className="de-payment-supported-container">
         <Grid.Row>
           <Grid.Column width={2}><Image className="de-payment-supported-app" src="resources/digital-india/DigitalIndia.webp" /></Grid.Column>
-          <Grid.Column width={4} style={{display: 'flex', 'justify-content': 'center', 'flex-direction': 'column'}}>
-            <Header as='h2' style={{color: '#1f2554', 'margin-bottom': '0px'}}>Supporting Digital India</Header>
+          <Grid.Column width={4} style={{display: 'flex', 'justifyContent': 'center', 'flexDirection': 'column'}}>
+            <Header as='h2' style={{color: '#1f2554', 'marginBottom': '0px'}}>Supporting Digital India</Header>
             <span> Accepting all payments from </span>
           </Grid.Column>
           <Grid.Column width={9}>

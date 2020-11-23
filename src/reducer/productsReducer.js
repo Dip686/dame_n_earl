@@ -1,10 +1,10 @@
 const defaultState = {
   activeCategory: 'indian_wear',
-  activePage: 1,
-  products: {}
+  activePage: 1
 };
 
 export default function getProducts(state = defaultState, action) {
+
   switch (action.type) {
     case 'UPDATE_ACTIVE_CATEGORY': 
       return {...state, activeCategory: action.payload, activePage: 1};

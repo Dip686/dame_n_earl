@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Menu } from 'semantic-ui-react';
 import EditProfile from './editProfile';
+import OrderView from '../orders/order';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -14,10 +15,40 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
   }
 }
+const orderDetails = [{
+  totalAmount: 2222,
+  orderId: 58323210,
+  deliveryStatus: 'success',
+  "products": [{
+    url: '1.png',
+    price: '',
+    productId: ''
+  },
+  {
+    url: '1.png',
+    price: '',
+    productId: ''
+  },
+  {
+    url: '1.png',
+    price: '',
+    productId: ''
+  }]
+},
+{
+  totalAmount: 222,
+  orderId: 58323220,
+  deliveryStatus: 'failed',
+  "products": [{
+    url: '1.png',
+    price: '',
+    productId: ''
+  }]
+}];
 class UserProfile extends React.Component {
   state = {
     userDetails: this.props.activeUser.userDetails,
-    activeCategory: 'profile'
+    activeCategory: 'order'
   };
   handleItemClick = (e, { name }) => this.setState({ activeCategory: name });
   render() {
@@ -45,7 +76,9 @@ class UserProfile extends React.Component {
             </Grid.Column>
             <Grid.Column width={13}>
               {
-                <EditProfile userDetails = {userDetails} />
+                activeCategory === 'profile' ?
+                  <EditProfile userDetails = {userDetails} />
+                : <OrderView orderDetails={orderDetails} />
               }
             </Grid.Column>
           </Grid.Row>
